@@ -19,6 +19,15 @@ class UserController extends Controller
     {
         $request->validated();
 
+        // Periksa apakah email sudah terdaftar
+        $existingUser = User::where('email', $request->email)->first();
+        if ($existingUser) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Email sudah terdaftar',
+            ], 400);
+        }
+
         $userData = [
             'username' => $request->username,
             'phoneNumber' => $request->phoneNumber,
