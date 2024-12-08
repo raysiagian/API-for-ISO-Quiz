@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\QuizCategory;
 use Illuminate\Support\Facades\Storage;
 
-class CategoryController extends Controller
+class QuizCategoryController extends Controller
 {
     //
 
@@ -41,7 +41,7 @@ class CategoryController extends Controller
             "image"=> Storage::url($imagePath),
             "id_Admin" => $request->id_Admin,
         ]);
-        return response()->json(['message' => 'Category created successfully', 'data' => $category]);
+        return response()->json(['message' => 'Category created successfully', 'data' => $category], 200);
     }
 
     public function update(Request $request, string $id){

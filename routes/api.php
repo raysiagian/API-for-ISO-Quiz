@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\QuizCategoryController;
+use App\Http\Controllers\Api\QuizSubCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +44,20 @@ Route::post('checkEmailAdmin', [AdminController::class, 'checkEmailAvailabilityA
 Route::middleware('auth:sanctum')->get('/admin', function (Request $request) {
     return $request->admin();
 });
+
+
+// Category
+Route::post('addCategory',[QuizCategoryController::class, "store"]);
+Route::get('getCategory', [QuizCategoryController::class, 'index']);
+Route::post('editCategory/{id}', [QuizCategoryController::class, 'update']);
+Route::delete('deleteCategory/{id}', [QuizCategoryController::class, 'destroy']);
+Route::get('category/{id}', [QuizCategoryController::class, 'show']);
+
+
+// subcateory
+Route::post('addSubCategory',[QuizSubCategoryController::class, "store"]);
+Route::get('getSubCategory', [QuizSubCategoryController::class, 'index']);
+Route::get('getSubCategoryByIdCategory', [QuizSubCategoryController::class, 'subcategorybyIdCategory']);
+Route::post('editSubCategory/{id}', [QuizSubCategoryController::class, 'update']);
+Route::delete('deleteSubCategory/{id}', [QuizSubCategoryController::class, 'destroy']);
+Route::get('subcategory/{id}', [QuizSubCategoryController::class, 'show']);
