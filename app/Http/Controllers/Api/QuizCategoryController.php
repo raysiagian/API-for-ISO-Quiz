@@ -26,6 +26,19 @@ class QuizCategoryController extends Controller
         return response()->json(['data' => $category]);
     }
 
+    public function show($id)
+    {
+        $category = QuizCategory::find($id);
+
+        // Jika category ditemukan, kembalikan sebagai respons JSON
+        if ($category) {
+            return response()->json(['data' => $category]);
+        }
+
+        // Jika category tidak ditemukan, kembalikan pesan error
+        return response()->json(['message' => 'Category not found'], 404);
+    }
+
 
     public function store(Request $request){
         $request->validate([

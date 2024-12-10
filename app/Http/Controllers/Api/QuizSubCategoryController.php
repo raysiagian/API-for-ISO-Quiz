@@ -20,6 +20,20 @@ class QuizSubCategoryController extends Controller
         return response()->json(['data' => $subcategory]);
     }
 
+    public function show($id)
+    {
+        $subcategory = QuizSubCategory::find($id);
+
+        // Jika subcategory ditemukan, kembalikan sebagai respons JSON
+        if ($subcategory) {
+            return response()->json(['data' => $subcategory]);
+        }
+
+        // Jika sub$subcategory tidak ditemukan, kembalikan pesan error
+        return response()->json(['message' => 'Subcategory not found'], 404);
+    }
+
+
     // menampilkan data subcategory beradasarkan id subcategory
     public function subcategorybyIdCategory(Request $request)
     {

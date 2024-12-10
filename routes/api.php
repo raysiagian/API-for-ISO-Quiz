@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\QuizCategoryController;
 use App\Http\Controllers\Api\QuizSubCategoryController;
+use App\Http\Controllers\Api\QuizMaterialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,4 +61,13 @@ Route::get('getSubCategory', [QuizSubCategoryController::class, 'index']);
 Route::get('getSubCategoryByIdCategory', [QuizSubCategoryController::class, 'subcategorybyIdCategory']);
 Route::post('editSubCategory/{id}', [QuizSubCategoryController::class, 'update']);
 Route::delete('deleteSubCategory/{id}', [QuizSubCategoryController::class, 'destroy']);
-Route::get('subcategory/{id}', [QuizSubCategoryController::class, 'show']);
+Route::get('subcategory/{id}'  , [QuizSubCategoryController::class, 'show']);
+
+
+// quiz material
+Route::post('addMaterial',[QuizMaterialController::class, "store"]);
+Route::get('getMaterial', [QuizMaterialController::class, 'index']);
+Route::get('getMaterialbyIdSubCategory', [QuizMaterialController::class, 'materialbyIdSubCategory']);
+Route::post('editMaterial/{id}', [QuizMaterialController::class, 'update']);
+Route::delete('deleteMaterial/{id}', [QuizMaterialController::class, 'destroy']);
+Route::get('material/{id}'  , [QuizMaterialController::class, 'show']);

@@ -13,7 +13,7 @@ class QuizMaterial extends Model
     protected $primaryKey = 'id_quizMaterial';
 
     protected $fillable = [
-        'id_quizCategory',
+        'id_quizSubCategory',
         'title',
         'data',
         'id_Admin',
