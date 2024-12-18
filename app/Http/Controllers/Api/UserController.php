@@ -33,6 +33,8 @@ class UserController extends Controller
             'phoneNumber' => $request->phoneNumber,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'gender' => $request->gender,
+            
         ];
 
         $user = User::create($userData);

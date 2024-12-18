@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\QuizCategoryController;
 use App\Http\Controllers\Api\QuizSubCategoryController;
 use App\Http\Controllers\Api\QuizMaterialController;
+use App\Http\Controllers\Api\QuizQuestionController;
+use App\Http\Controllers\Api\ScoreQuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,3 +73,26 @@ Route::get('getMaterialbyIdSubCategory', [QuizMaterialController::class, 'materi
 Route::post('editMaterial/{id}', [QuizMaterialController::class, 'update']);
 Route::delete('deleteMaterial/{id}', [QuizMaterialController::class, 'destroy']);
 Route::get('material/{id}'  , [QuizMaterialController::class, 'show']);
+
+
+
+// 2 controller berikut belum ditest pada postman
+
+// quiz question
+Route::post('addQuestion',[QuizQuestionController::class, "store"]);
+Route::get('getQuestion', [QuizQuestionController::class, 'index']);
+Route::get('getQuestionbyIdSubCategory', [QuizQuestionController::class, 'questionbyIdSubCategory']);
+Route::post('editQuestion/{id}', [QuizQuestionController::class, 'update']);
+Route::delete('deleteQuestion/{id}', [QuizQuestionController::class, 'destroy']);
+Route::get('question/{id}'  , [QuizQuestionController::class, 'show']);
+
+
+// score
+Route::get('/scorequiz', [ScoreQuizController::class, 'index']);
+Route::get('/scorequiz/{id_user}/{id_quizsubCategory}', [ScoreQuizController::class, 'show']);
+Route::post('/scorequiz', [ScoreQuizController::class, 'updateOrInsert']);
+Route::delete('/scorequiz/{id_scoreQuiz}', [ScoreQuizController::class, 'delete']);
+Route::get('/scorequiz/history/{id_user}', [ScoreQuizController::class, 'showHistory']);
+Route::get('/scorequiz/total/{id_user}', [ScoreQuizController::class, 'totalScore']);
+Route::get('/scorequiz/leaderboard', [ScoreQuizController::class, 'leaderboard']);
+Route::get('/user/leaderboard/{userId}', [ScoreQuizController::class, 'userLeaderboard']);
