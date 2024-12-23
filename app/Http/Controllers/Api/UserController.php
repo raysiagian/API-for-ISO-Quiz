@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
-{
+{   
+    // public function __construct()
+    // {
+    //     // Terapkan middleware 'check.user' untuk semua metode kecuali register, login, dan checkEmailAvailability
+    //     $this->middleware('check.user')->except(['register', 'login', 'checkEmailAvailability']);
+    // }
 
     public function register(RegisterUserRequest $request)
     {
@@ -131,3 +136,4 @@ class UserController extends Controller
      }
 
 }
+
