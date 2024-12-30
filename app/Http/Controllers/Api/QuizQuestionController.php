@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\QuizQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class QuizQuestionController extends Controller
 {
@@ -41,21 +42,33 @@ class QuizQuestionController extends Controller
         // Validasi input
         $request->validate([
             'id_quizSubCategory' => 'required|exists:quizsubcategory,id_quizSubCategory',
-            'question' => 'required|string',
-            'option_A' => 'required|string',
-            'option_B' => 'required|string',
-            'option_C' => 'required|string',
-            'option_D' => 'required|string',
-            'option_E' => 'required|string',
-            'correct_Answer' => 'required|string',
+            'question' => 'required',
+            'option_A' => 'required',
+            'option_B' => 'required',
+            'option_C' => 'required',
+            'option_D' => 'required',
+            'option_E' => 'required',
+            'correct_Answer' => 'required',
             'id_Admin' => 'required',
         ]);
 
         // Membuat record baru dalam database
-        $question = QuizQuestion::create($request->all());
+        // $question = QuizQuestion::create($request->all());
+
+        $question = QuizQuestion::create([
+            "id_Admin" => $request->id_Admin,
+            "question"=> $request->question,
+            "option_A"=> $request->option_A,
+            "option_B"=> $request->option_B,
+            "option_C"=> $request->option_C,
+            "option_D"=> $request->option_D,
+            "option_E"=> $request->option_E,
+            "correct_Answer"=> $request->correct_Answer,
+            "id_quizSubCategory" => $request->id_quizSubCategory,
+        ]);
 
         // Mengembalikan pertanyaan pretest yang baru dibuat sebagai respons JSON
-        return response()->json(['message' => 'Question created successfully', 'data' => $question], 201);
+        return response()->json(['message' => 'Question created successfully', 'data' => $question], 200);
     }
 
     public function show($id)

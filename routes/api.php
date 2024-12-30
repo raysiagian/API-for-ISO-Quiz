@@ -27,6 +27,8 @@ use App\Http\Controllers\Api\ScoreQuizController;
 Route::post('register', [UserController::class,'register']);
 Route::post('login', [UserController::class, 'login'])->name('login');;
 
+Route::post('checkEmail', [UserController::class, 'checkEmailAvailability']);
+
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', [UserController::class, 'user']);
     Route::get('/profile', [UserController::class, 'profile']);
