@@ -15,6 +15,7 @@ class ScoreQuiz extends Model
     protected $fillable = [
         'id_User',
         'id_quizsubCategory',
+        'id_quizCategory',
         'score_Quiz',
     ];
 

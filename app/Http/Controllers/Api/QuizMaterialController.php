@@ -32,20 +32,33 @@ class QuizMaterialController extends Controller
     }
 
 
+    // public function materialbyIdSubCategory(Request $request)
+    // {
+    //     $id_quizSubCategory = $request->input('id_quizSubCategory'); // Ambil parameter
+    //     $query = QuizMaterial::query();
+    
+    //     if ($id_quizSubCategory) {
+    //         $query->where('id_quizSubCategory', $id_quizSubCategory); // Filter berdasarkan subkategori
+    //     }
+    
+    //     $materials = $query->get();
+    
+    //     return response()->json(['data' => $materials]);
+    // }
+    
     public function materialbyIdSubCategory(Request $request)
     {
-        $id_quizSubCategory = $request->query('id_quizSubCategory');
-
-        $query = QuizMaterial::query();
-
-        if($id_quizSubCategory){
-            $query->where('id_quizSubCategory', $id_quizSubCategory);
+        $id_quizSubCategory = $request->input('id_quizSubCategory');
+        
+        if (!$id_quizSubCategory) {
+            return response()->json(['message' => 'id_quizSubCategory parameter is required'], 400);
         }
 
-        $quizmaterial = $query->get();
+        $materials = QuizMaterial::where('id_quizSubCategory', $id_quizSubCategory)->get();
 
-        return response()->json(['data' => $quizmaterial]);
+        return response()->json(['data' => $materials]);
     }
+
 
     public function store(Request $request)
     {

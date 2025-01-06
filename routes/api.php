@@ -33,6 +33,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', [UserController::class, 'user']);
     Route::get('/profile', [UserController::class, 'profile']);
     Route::post('/logout', [UserController::class, 'logout']);
+
+    Route::post('sendScore/{id_quizsubCategory}', [ScoreQuizController::class, 'sendScore']);
+    // Endpoint untuk memperbarui skor yang sudah ada
+    Route::put('/updateScoreQuiz/{id_quizsubCategory}', [ScoreQuizController::class, 'update']);
+    // Endpoint untuk melihat riwayat skor user tertentu
+    Route::get('/score-quiz/history/{id_user}', [ScoreQuizController::class, 'showHistory']);
+    Route::get('score/highest', [ScoreQuizController::class, 'highestScoreBySubCategory']);
+
 });
 
 
@@ -70,7 +78,7 @@ Route::get('subcategory/{id}'  , [QuizSubCategoryController::class, 'show']);
 // quiz material
 Route::post('addMaterial',[QuizMaterialController::class, "store"]);
 Route::get('getMaterial', [QuizMaterialController::class, 'index']);
-Route::get('getMaterialbyIdSubCategory', [QuizMaterialController::class, 'materialbyIdSubCategory']);
+Route::get('materialbyIdSubCategory', [QuizMaterialController::class, 'materialbyIdSubCategory']);
 Route::post('editMaterial/{id}', [QuizMaterialController::class, 'update']);
 Route::delete('deleteMaterial/{id}', [QuizMaterialController::class, 'destroy']);
 Route::get('material/{id}'  , [QuizMaterialController::class, 'show']);
@@ -89,11 +97,11 @@ Route::get('question/{id}'  , [QuizQuestionController::class, 'show']);
 
 
 // score
-Route::get('/scorequiz', [ScoreQuizController::class, 'index']);
-Route::get('/scorequiz/{id_user}/{id_quizsubCategory}', [ScoreQuizController::class, 'show']);
-Route::post('/scorequiz', [ScoreQuizController::class, 'updateOrInsert']);
-Route::delete('/scorequiz/{id_scoreQuiz}', [ScoreQuizController::class, 'delete']);
-Route::get('/scorequiz/history/{id_user}', [ScoreQuizController::class, 'showHistory']);
-Route::get('/scorequiz/total/{id_user}', [ScoreQuizController::class, 'totalScore']);
-Route::get('/scorequiz/leaderboard', [ScoreQuizController::class, 'leaderboard']);
-Route::get('/user/leaderboard/{userId}', [ScoreQuizController::class, 'userLeaderboard']);
+Route::get('scorequiz', [ScoreQuizController::class, 'index']);
+Route::get('scorequiz/{id_user}/{id_quizsubCategory}', [ScoreQuizController::class, 'show']);
+Route::post('scorequiz', [ScoreQuizController::class, 'updateOrInsert']);
+Route::delete('scorequiz/{id_scoreQuiz}', [ScoreQuizController::class, 'delete']);
+Route::get('scorequiz/history/{id_user}', [ScoreQuizController::class, 'showHistory']);
+Route::get('scorequiz/total/{id_user}', [ScoreQuizController::class, 'totalScore']);
+Route::get('scorequiz/leaderboard', [ScoreQuizController::class, 'leaderboard']);
+Route::get('user/leaderboard/{userId}', [ScoreQuizController::class, 'userLeaderboard']);
